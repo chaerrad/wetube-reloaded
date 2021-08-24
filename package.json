@@ -6,8 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/chaerrad/wetube-reloaded.git"
   },
+
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js"
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "author": "chaeby",
   "license": "MIT",
