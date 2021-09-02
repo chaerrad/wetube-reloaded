@@ -30,8 +30,10 @@ export const trending = (req, res) =>
     return res.render("home",{pageTitle: "Home",videos});
 }
 
-export const see = (req,res) => {
-    return res.render("watch" );
+export const watch = (req,res) => {
+    const id = req.params.id;
+    const video= videos[id-1]
+    return res.render("watch",{ pageTitle: `Watching ${video.title}`, video} );
 }
 
 export const edit = (req,res) => {
