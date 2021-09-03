@@ -5,9 +5,6 @@ import {watch,upload,deleteVideo,getEdit,postEdit} from "../controllers/videoCon
 const videoRouter = express.Router();
 
 videoRouter.get("/:id(\\d+)",watch);
-videoRouter.get("/:id(\\d+)/edit",getEdit);
-videoRouter.get("/:id/(\\d+)delete",postEdit);
-
-
+videoRouter.route("/:id(\\d+)/edit").get(getEdit).post(postEdit);
 
 export default videoRouter;
