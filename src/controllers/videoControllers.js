@@ -1,4 +1,4 @@
-import Video from "../midels/Video"
+import Video from "../models/Video";
 
 export const home = (req, res) => 
 {   
