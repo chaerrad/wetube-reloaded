@@ -65,4 +65,68 @@ nodemon은 우리 파일이 수정되면 바로 컴파일되게 도와주는 패
 //여기까지가 개발을 위한 설정이다.
 정리하자면, package.json에서 npm i express를 통해 개발에 필요한 dependencies를 설치하고, 우리 스스로도 개발을 쉽게하기위해 babel과 nodemon을 설치했다고 볼수있다.
 
+10/06
+
 3.0 Your first server
+
+import express from "express";
+npm은 똑똑해서 "nodemodules/express"라고 하지않아도 잘 인식.
+
+const app = express(); //express-> creates express application
+서버란 인터넷이 연결되어있는 항상 켜져있는 컴퓨터이다.
+서버는 request를 listen하고있다. 서버는 듣고 답한다.
+서버는 나의 행동을 listen하고 나는 서버에 request한다.
+app.listen() ->콜백반환
+
+콜백은 바닐라 js에서 배웠듯이
+button.addEventListener("click",handleClick)일때 click하면 handleClick이 작동하는 함수
+
+app.listen(4000, handleListening)->4000포트를 통해 listen하고 콜백하겠다는 의미이다.
+
+3-1 Get Requests
+서버를 만들면, 유저의 request에 응하는 Server respond를 만들어야한다.
+만약 URL을 주소창에 치면, 서버에게 get request를 요청하는것이다.
+그리고 브라우저에는 그 반응을 전시한다.
+
+3.2 Get Requests part Two
+get은 request의 하나일뿐이다.
+express()와 listen()에 request에 응답하는법을 적을것이다.(준비시킨다 보면된다)
+
+app.get("/",callback함수)
+이제 response를 해줄차례이다.
+
+3.3 Responses
+
+addEventListener(event)와 같이 express는 req,res를 선물해준다.
+req object와 res object 생성
+const callback함수 = (req,res) => {
+
+}
+request를 받았으면 response를 해주어야한다.
+ex) return res.end();//종료, return res.send("I love you");//메시지 출력
+
+3.4 recap
+express를 사용해서 app을 만들고, app 은 req이 있고, res도 있다.
+또, Router도 있다 (router는 추후배움)
+
+3.5 Middlewares part one
+
+middleware -> middle software
+요청과 대답사이에 있다고 보면된다.
+middleware함수 = (req,res,next)=>{
+next();
+}
+app.get("/",middleware함수,callback함수)
+middleware는 넘기는 함수이다.
+
+3.6 Middlewares part two
+
+app.use(middleware controller) //전역 middleware
+
+app.use(middleware함수)가 app.get과 같은 method앞에 있으면 app.use의 middleware함수를 거치게된다. (단, use가 먼저와야하는 순서를 주의하자)
+
+3.11 External Middlewares
+morgan을 다운받으면 쫌더 편한 전역middleware을 사용가능하다.
+import morgan from "morgan"
+const logger = morgan("dev");
+app.use(logger);
