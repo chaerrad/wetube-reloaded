@@ -130,3 +130,53 @@ morgan을 다운받으면 쫌더 편한 전역middleware을 사용가능하다.
 import morgan from "morgan"
 const logger = morgan("dev");
 app.use(logger);
+
+10/07
+4.0 What are Routers?
+
+라우터는 controller와 url을 쉽게 관리하게 도와준다.(미니 어플리케이션과 같다)
+라우터는 작업중인 주제를 기반으로 url을 그룹화해준다.
+ex)
+/
+....
+user/
+.....
+watch
+....
+
+4.1 Making our Routers
+ex)
+const videoRouter = express.Router();
+app.use("/videos",videoRouter); -> 그룹화시키고
+videoRouter.get("/watch",handleWatchBide)->response도 가능!!
+-> /videos/watch url생성!!
+
+4.2 Cleaning the Code
+파일간의 import과 export을 통해 서로 정보를 공유
+ex)
+export default ~~~~;
+import ~~~~ form "**\*\***";
+
+url주소 진입 -> 라우터로 -> 라우터의 request와 response 대응
+
+4.3 Exports
+한 파일에서 여러 export이 생기면
+import {join} from "**\***";
+import의 이름 변형없이 그대로 써야한다.
+
+4.7 URL Parameters part One
+videoRouter.get("/:id",see); ->/:id는 뭘 의미할까?
+':'는 왜 있는걸까?
+:id->parameter-> url안에 변수가 있음을 알려준다
+:id가 없으면 ("1",see) ("2",see)...를 일일이 만들어줘여한다. 그래서 변수(parameter)가있는것이다.
+req.params.id
+라우터순서가 중요하다!!
+
+:id가 위에있으면 의도치 않게 문자열도 변수로 인식하고 가져감
+
+4.8 URL Parameters part Two
+
+변수에 오는것을 숫자로만 제한하는방법
+:id(\\d+)
+
+추후 정규식에 대해 쫌더 알아봐야함.
