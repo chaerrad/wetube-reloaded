@@ -180,3 +180,48 @@ req.params.id
 :id(\\d+)
 
 추후 정규식에 대해 쫌더 알아봐야함.
+
+10/08
+
+5.0 Returning HTMl
+res.send("dafsdf")로 html을 send할수있지만, 너무 고되다...
+매번 복붙하지않도록 해주는 기능이 필요 ->pug
+
+5.1 Configuring Pug
+Pug->템필릿 엔진(template Engine)->템플릿을 이용해서 뷰만드는걸 돕는다
+
+1.npm i pug이후,
+2.express에게 pug를 html헬퍼로 쓰고싶다고 말해야한다.
+express공식문서를 보면 app에 view engine을 세팅할수 있다.
+이 view engine이 이제 pug임을 공표하면된다.
+app.set("view engine","pug") 3. process.cwd().+/views
+
+/views에 pug파일 만들고 res.render("")
+
+5.2 Partials
+pug의 진정한 강점->partial있으면 복붙안해도된다.
+ex.)include partials/footer.pug
+
+5.3 Extending Templates
+base를 만들고 이를 확장하는식으로 만들어보자!
+ex.) extends base.pug
+extends는 상속의 개념으로 알자
+base.pug에
+block content 생성->상속받는 pug들에게 자신이 할수 있는것을 제공
+render->code를 html로 바꾸는것
+5.4 variables to Templates
+#{pageTitle}->우리가 변수를 제공해줘야한다.
+컨트롤러가 render하므로 variable을 넣어주자.
+ex.) res.render("Home",{pageTitle:"Home"}//템플릿에 보낼 변수)
+5.8iteration
+variable이 배열이면 each video in videos
+5.9 mixins
+mixin은 데이터를 받을수 있는 partial의 개념이다.
+/mixin
+mixin video(info)
+info.dfsdf
+info.dfsd
+/home pug
+include mixins/video
+each potato in videos
++video(potato)
