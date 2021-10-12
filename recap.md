@@ -225,3 +225,48 @@ info.dfsd
 include mixins/video
 each potato in videos
 +video(potato)
+
+
+10/12
+6.0 Array Database part one
+const id =req.params.id
+const {id}=req.params // because of ES6
+6.1 Array Database part Two
+return res.render("watch",{pageTitle: `Watching ${video.tite}` video:video//video})
+difference between absolute url and relative url
+"/edit"-> absolute url
+"edit"-> relative url
+ex> /edit/password -> /edit/potato
+
+6.2 Edit Video part One
+back end를 보내는법을 알아보자
+form(action ="")//보내야할 url
+form(method = "POST")
+get request과 post request의 차이점: post 파일을 보내거나 데이터를 보내거나 로그인할때 사용
+get은 검색을 할때 씁니다.(database변경)
+videoRouter.post("id(//)/edit",postedit)
+6.3 Edit Video part Two
+get - 접근
+post - 전송 
+redirect - 다시보내다
+parameter - 매개변수
+express는 form으로 보낸 데이터를 읽지못함
+app.use(express.urlencoded(){extended:true})//application이 form을 이해해서 req.body사용간으
+6.5 More Practice part one
+6.6 More Practice part two
+6.7 Introduction of MongoDB
+MongoDB - document based database 
+MongoDB 저장되는것들 -> json-liked-documents != row기반 database
+{
+    "_id": "dsfsdf"
+    .....
+}-> 와같은 형태로 database는 저장
+you need to install to use mongoDB
+6.8 connecting to Mongo
+mongoose- mongoDB와 NODEJS의 다리가되어주는 역할
+ex)우리가 javascript를 작성하여 mongoDB에 전달해주는것이 mongoose의 역할
+now we're going to connect mongo database
+import mongoose from "mongoose";
+mongoose.connect(mongodb_url+(/my db));//새로운 나의 db에 연결
+6.9 CRUD introduction
+now we're ready to make real data in DB!!!
