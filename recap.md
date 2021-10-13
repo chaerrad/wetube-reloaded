@@ -270,3 +270,78 @@ import mongoose from "mongoose";
 mongoose.connect(mongodb_url+(/my db));//새로운 나의 db에 연결
 6.9 CRUD introduction
 now we're ready to make real data in DB!!!
+10/13
+6.10 Video Model
+import mongoose from "mongoose"
+before make model -> define shape of the model -> schema
+const videoSchema = new mongoose.Schema(
+    {
+        title: String, //you have to define the type
+        description: String,
+        createdAt: Date,
+        hashtags: [{type:String}],
+        meta: {
+            views: Number,
+            rating: Number,
+        }
+    }
+)//이런식으로 Schema를작성한다.
+const movieModel = mongoose.model("Video"//the name of the model, videoSchema)
+export default movieModel;
+//now we can import it out of the file
+
+6.11 Our first Query
+mongooese Documentation에는 많은 queries 들이 존재한다.(CRUD operations을 위한 많은 functions)
+mongoose query can be executed int two ways
+1. callback
+2. promise
+callback 
+//function이 끝난다면 일어나는 function(js에서 기다리는 방식)then 방식..
+6.12 Our first Query (2)
+Learn more about callback
+export const home = (req,res) => {
+    Video.find({},(error,videos)=>{
+        //콜백함수입니다.
+        console.log("error",error)
+        console.log("videos",videos)
+    })
+    console.log("Hello")
+}
+순서에도 불구하고 hello,error,video순으로 출력된다. 왜그럴까?
+=> callback의힘, 이를 응용해서
+export const home = (req,res) => {
+    Video.find({},(error,videos)=>{
+        //콜백함수입니다.
+     res.render("home",{pageTitle: "Home",videos})
+    })
+    
+}
+와같이 하게된다면, 모든 정보가 전달되고 render이 일어난다!!
+6.13 async await
+callback은 다소 세련되보이지 않을수도 있다.
+promise는 최신 callback방식이라 생각하면 된다.
+promise를 사용하면 callback의 장황한 코드를 쓰지 않아도 된다.
+export const home = async (req,res) => {
+  try{
+      const videos = await Video.find({});
+      return res.render("home",{pageTitle:"Home", videos})
+  }catch(error){
+      return res.render("server-error"{error})
+  }
+}
+async일때 await(database를)으로 계속 기다려줄것이다!!
+async/await는 대체 왜 필요한 거야? Promise를 기다릴 거면 처음부터 Promise를 안 쓰고 절차형으로 코딩하면 되지! 했는데 외부와 소통할 때(이를테면 다른 서버와..) 애초에 비동기 처리로 제한 되어 있는 상황에서 써야 하는 것
+6.14 Returns and Renders
+1. return의 역할 : 본질적인 return의 역할보다는 function을 마무리짓는 역할로 사용되고 있음.
+- 이러한 경우 return이 없어도 정상적으로 동작하지만 실수를 방지하기 위해 return을 사용
+2. render한 것은 다시 render할 수 없음
+- redirect(), sendStatus(), end() 등등 포함 (express에서 오류 발생)
+6.15 Creating a Video Part One
+.split(",")->","를기준으로 분리하여 배열 반환
+.map(word=>`#${word}`)->#를 붙여서 반환해줍니다.
+mongoose는 고유 id도 제공합니다.
+6.16 Creating a Video part Two
+
+
+
+
