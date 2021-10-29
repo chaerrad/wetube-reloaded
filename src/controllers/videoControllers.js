@@ -68,21 +68,27 @@ export const postUpLoad = async (req,res) => {
         }
 
         
-<<<<<<< HEAD
     };
 
-    export const search = (req, res) => {
-        const { keyword } = req.query;
-        if (keyword) {
-          // search
-        }
-        return res.render("search", { pageTitle: "Search" });
+    export const deleteVideo = async (req, res) => {
+        const { id } = req.params;
+        await Video.findByIdAndDelete(id);
+        return res.redirect("/");
       };
-=======
-};
-export const deleteVideo = async (req, res) => {
-    const { id } = req.params;
-    await Video.findByIdAndDelete(id);
-    return res.redirect("/");
-  };
->>>>>>> 5ddbf81ac17dbd037fcbe7435f520cbb517262af
+    
+
+    export const search = async (req, res) => {
+        const { keyword } = req.query;
+        let videos = [];
+        if (keyword) {
+            videos = await Video.find({
+                title: {
+                  $regex: new RegExp(`${keyword}$`, "i"),
+                },
+              });
+        }
+        return res.render("search", { pageTitle: "Search", videos });
+      };
+
+
+
