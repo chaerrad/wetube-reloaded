@@ -20,3 +20,5 @@ export const protectorMiddleware = (req, res, next) => {
       return res.redirect("/");
     }
   };
+
+
