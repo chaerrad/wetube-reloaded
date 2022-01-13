@@ -22,6 +22,18 @@ export const protectorMiddleware = (req, res, next) => {
       return res.redirect("/");
     }
   };
-  export const uploadFiles = multer({ dest: "uploads/" });
+  export const avatarUpload = multer({
+    dest: "uploads/avatars/",
+    limits: {
+      fileSize: 3000000,
+    },
+  });
+
+  export const videoUpload = multer({
+    dest: "uploads/videos/",
+    limits: {
+      fileSize: 100000000,
+    },
+  });
 
 
